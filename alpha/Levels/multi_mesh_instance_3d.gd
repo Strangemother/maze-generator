@@ -1,6 +1,6 @@
 extends MultiMeshInstance3D
 
-func load_from_file(name="tiny-paths.json") -> Dictionary:
+func load_from_file(name="tiny-walls.json") -> Dictionary:
 	var json = JSON.new()
 	var content_str = FileAccess.get_file_as_string("res://Data/" + name)
 	var content:Dictionary = JSON.parse_string(content_str)
@@ -33,11 +33,11 @@ func spun_like_2(wallsData):
 	#multimesh = MultiMesh.new()
 	#multimess = $MeshInstance3D.new()
 	# Set the format first.
-	var walls = wallsData['edges']
+	var walls = wallsData['walls']
 	var metaCount = wallsData["meta"]["rows"] * wallsData["meta"]["cols"]
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	# Then resize (otherwise, changing the format is not allowed).
-	var lw = len(wallsData['edges'])
+	var lw = len(wallsData['walls'])
 	print("Loading ", lw, " walls")
 	multimesh.instance_count = lw
 	# Maybe not all of them should be visible at first.
