@@ -227,7 +227,7 @@ transform = Transform3D(0.999403, -0.0341708, -0.00518501, 0.0345599, 0.989665, 
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BasePivot"]
 libraries = {
-"": SubResource("AnimationLibrary_56ijk")
+&"": SubResource("AnimationLibrary_56ijk")
 }
 
 [node name="ProtoMesh" type="MeshInstance3D" parent="BasePivot"]
@@ -277,9 +277,6 @@ unique_name_in_owner = true
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../BasePivot")
-libraries = {
-"": SubResource("AnimationLibrary_56ijk")
-}
 tree_root = SubResource("AnimationNodeBlendSpace2D_e0dl0")
 anim_player = NodePath("../BasePivot/AnimationPlayer")
 parameters/blend_position = Vector2(0, 0)

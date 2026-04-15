@@ -1,21 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://bgm8slgh3fcj5"]
+[gd_scene load_steps=14 format=3 uid="uid://bwyygykhqrndj"]
 
-[ext_resource type="PackedScene" uid="uid://vwr8ajoufse8" path="res://Controller/Player.tscn" id="1_611rl"]
-[ext_resource type="Environment" uid="uid://dybgim7p06ncg" path="res://Levels/BrightWorld.tres" id="1_s1ocm"]
-[ext_resource type="Texture2D" uid="uid://cd0hxvarmnxff" path="res://assets/carpet.jpg" id="2_2yvdw"]
-[ext_resource type="Script" uid="uid://diol7e5kpdvm2" path="res://Levels/pseudo_floor.gd" id="5_2yvdw"]
-[ext_resource type="Texture2D" uid="uid://ca14skqgfmbsu" path="res://assets/wall.png" id="6_kxr0u"]
-[ext_resource type="Script" uid="uid://c8iw1p1xk1bxv" path="res://Levels/multi_mesh_instance_3d.gd" id="6_voj1p"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fepxo"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.211117, 0.40455, 0.643137, 1)
+[ext_resource type="Environment" uid="uid://dybgim7p06ncg" path="res://Levels/BrightWorld.tres" id="1_vt7by"]
+[ext_resource type="Texture2D" uid="uid://cd0hxvarmnxff" path="res://assets/carpet.jpg" id="2_7bnf8"]
+[ext_resource type="Script" uid="uid://diol7e5kpdvm2" path="res://Levels/pseudo_floor.gd" id="3_o2mva"]
+[ext_resource type="PackedScene" uid="uid://vwr8ajoufse8" path="res://Controller/Player.tscn" id="4_priw0"]
+[ext_resource type="Texture2D" uid="uid://ca14skqgfmbsu" path="res://assets/wall.png" id="5_56afu"]
+[ext_resource type="Script" uid="uid://c8iw1p1xk1bxv" path="res://Levels/multi_mesh_instance_3d.gd" id="6_kqrj8"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2yvdw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_voj1p"]
-albedo_texture = ExtResource("2_2yvdw")
+albedo_texture = ExtResource("2_7bnf8")
 uv1_scale = Vector3(0.3, 0.3, 0.3)
 uv2_scale = Vector3(0.3, 0.3, 0.3)
 
@@ -23,7 +18,7 @@ uv2_scale = Vector3(0.3, 0.3, 0.3)
 size = Vector3(80, 0.2, 80)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kv5fy"]
-albedo_texture = ExtResource("6_kxr0u")
+albedo_texture = ExtResource("5_56afu")
 uv1_scale = Vector3(8, 4, 1)
 uv2_scale = Vector3(3, 3, 3)
 
@@ -47,21 +42,7 @@ rings = 1
 [node name="TestLevel" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("1_s1ocm")
-
-[node name="FloorCSG" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.592, -1.1, 13.951)
-visible = false
-material_override = SubResource("StandardMaterial3D_fepxo")
-use_collision = true
-size = Vector3(56.7334, 1, 47)
-
-[node name="Pool3" type="CSGCylinder3D" parent="FloorCSG"]
-transform = Transform3D(0.667313, 0, 0.744778, 0, 1, 0, -0.744778, 0, 0.667313, 18.3637, -0.16913, -16.7333)
-visible = false
-operation = 2
-radius = 10.0
-height = 0.5
+environment = ExtResource("1_vt7by")
 
 [node name="MeshFloor" type="MeshInstance3D" parent="."]
 transform = Transform3D(24.7982, 0, 0, 0, 1.14416, 0, 0, 0, 25.8537, 16.225, 0, 12.451)
@@ -73,10 +54,10 @@ skeleton = NodePath("../MazeWallMultiMesh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.3831, -0.5, 35.5028)
 material_override = SubResource("StandardMaterial3D_voj1p")
 mesh = SubResource("BoxMesh_jyvk6")
-script = ExtResource("5_2yvdw")
+script = ExtResource("3_o2mva")
 
-[node name="Player" parent="." instance=ExtResource("1_611rl")]
-transform = Transform3D(-0.0948192, 0, -0.136799, 0, 0.166447, 0, 0.136799, 0, -0.0948192, -2.49383, 1, -1.79099)
+[node name="Player" parent="." instance=ExtResource("4_priw0")]
+transform = Transform3D(-0.0948192, 0, -0.136799, 0, 0.166447, 0, 0.136799, 0, -0.0948192, 1.10114, 1, 1.58076)
 base_speed = 5.0
 jump_height = 4.2
 mouse_sensitivity = 0.001
@@ -84,10 +65,11 @@ mouse_sensitivity = 0.001
 [node name="MazeWallMultiMesh" type="MultiMeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.045, 0, 0, 0, 0.946, 0, 0, 0)
 multimesh = SubResource("MultiMesh_voj1p")
-script = ExtResource("6_voj1p")
+script = ExtResource("6_kqrj8")
 
 [node name="WallUnit" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000187516, 2.15859, 0)
+visible = false
 mesh = SubResource("BoxMesh_voj1p")
 
 [node name="NorthPole" type="MeshInstance3D" parent="."]

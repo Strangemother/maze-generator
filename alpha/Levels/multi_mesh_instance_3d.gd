@@ -1,6 +1,6 @@
 extends MultiMeshInstance3D
 
-func load_from_file(name="tiny-walls-2.json") -> Dictionary:
+func load_from_file(name="tiny-walls.json") -> Dictionary:
 	var json = JSON.new()
 	var content_str = FileAccess.get_file_as_string("res://Data/" + name)
 	var content:Dictionary = JSON.parse_string(content_str)
@@ -44,7 +44,7 @@ func spun_like_2(wallsData):
 	print("Loading ", lw, " walls + ", border_count, " border = ", total)
 	multimesh.instance_count = total
 	multimesh.visible_instance_count = total
-	var cell_size: float = 1.0
+	var cell_size: float = 2.0
 	var scaled_transform: Transform3D
 	# Set the transform of the inner wall instances.
 	for i in lw:
@@ -67,7 +67,7 @@ func spun_like_2(wallsData):
 		scaled_transform = Transform3D(Basis(), pos)
 		scaled_transform = scaled_transform.rotated_local(Vector3.UP, rot)
 		multimesh.set_instance_transform(i, scaled_transform)
-
+	
 	# Border walls
 	var idx = lw
 	# Top edge: horizontal walls along row 0

@@ -94,9 +94,12 @@ func _physics_process(delta: float) -> void:
 		else:
 			# Double fall speed, after peak of jump or release of jump button.
 			velocity.y -= gravity * delta * fall_multiplier
+	if self.position.y < 0.0:
+		self.position.y = 0.0
+		velocity.y += gravity * delta * (fall_multiplier * 1)
 		
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump"):
 		# Projectile motion to turn jump height into a velocity.
 		velocity.y = sqrt(jump_height * 2.0 * gravity)
 		jump_particles.restart()
@@ -184,5 +187,6 @@ func smooth_camera_zoom(delta: float) -> void:
 
 # Play a footstep sound effect when moving.
 func _on_footstep_timer_timeout() -> void:
-	if is_on_floor() and get_movement_direction():
-		run_audio.play()
+	pass
+	#if is_on_floor() and get_movement_direction():
+		#run_audio.play()
