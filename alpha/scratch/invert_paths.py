@@ -1,11 +1,11 @@
 """
 
-    $ python invert_paths.py maze-1-paths.json maze-1-walls.json
-    
-    Total possible adjacencies: 760
-    Open passages (edges):      400
-    Walls:                      360
-    Written to maze-1-walls.json
+    $ python invert_paths.py ../Data/tiny-paths.json ../Data/tiny-walls-2.json
+
+    Total possible adjacencies: 40
+    Open passages (edges):      25
+    Walls:                      16
+    Written to ../Data/tiny-walls-2.json
 
 Given a maze export JSON (with meta, nodes, edges), produce the
 _inverted_ wall list.
@@ -85,10 +85,10 @@ def main():
     data = json.loads(args.input_file.read_text())
     walls = compute_walls(data)
 
+    meta = data["meta"]
     total_adj = (
-        (meta := data["meta"])
-        and (meta["rows"] * (meta["cols"] - 1))  # horizontal
-        + ((meta["rows"] - 1) * meta["cols"])     # vertical
+        meta["rows"] * (meta["cols"] - 1)   # pairs sharing a row (right neighbours)
+        + (meta["rows"] - 1) * meta["cols"] # pairs sharing a col (down neighbours)
     )
 
     result = {
