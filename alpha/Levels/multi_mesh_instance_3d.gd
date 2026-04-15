@@ -1,6 +1,6 @@
 extends MultiMeshInstance3D
 
-func load_from_file(name="tiny-walls.json") -> Dictionary:
+func load_from_file(name="tiny-walls-2.json") -> Dictionary:
 	var json = JSON.new()
 	var content_str = FileAccess.get_file_as_string("res://Data/" + name)
 	var content:Dictionary = JSON.parse_string(content_str)
@@ -34,20 +34,20 @@ func spun_like_2(wallsData):
 	#multimess = $MeshInstance3D.new()
 	# Set the format first.
 	var walls = wallsData['walls']
-	var metaCount = wallsData["meta"]["rows"] * wallsData["meta"]["cols"]
-	multimesh.transform_format = MultiMesh.TRANSFORM_3D
-	# Then resize (otherwise, changing the format is not allowed).
-	var lw = len(wallsData['walls'])
-	print("Loading ", lw, " walls")
-	multimesh.instance_count = lw
-	# Maybe not all of them should be visible at first.
-	multimesh.visible_instance_count = min(lw, 1000)
-	#multimesh.scale = Vector3(.2,.2,1)
 	var cols: int = wallsData["meta"]["cols"]
+	var rows: int = wallsData["meta"]["rows"]
+	multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	# Total = inner walls + border walls (top + bottom + left + right)
+	var lw = len(walls)
+	var border_count = 2 * cols + 2 * rows
+	var total = lw + border_count
+	print("Loading ", lw, " walls + ", border_count, " border = ", total)
+	multimesh.instance_count = total
+	multimesh.visible_instance_count = total
 	var cell_size: float = 1.0
 	var scaled_transform: Transform3D
-	# Set the transform of the instances.
-	for i in multimesh.visible_instance_count:
+	# Set the transform of the inner wall instances.
+	for i in lw:
 		var wall = walls[i]
 		var a: int = wall[0]
 		var b: int = wall[1]
@@ -67,6 +67,35 @@ func spun_like_2(wallsData):
 		scaled_transform = Transform3D(Basis(), pos)
 		scaled_transform = scaled_transform.rotated_local(Vector3.UP, rot)
 		multimesh.set_instance_transform(i, scaled_transform)
+
+	# Border walls
+	var idx = lw
+	# Top edge: horizontal walls along row 0
+	for c in cols:
+		var pos = Vector3((c + 0.5) * cell_size, 0.0, 0.0)
+		scaled_transform = Transform3D(Basis(), pos)
+		multimesh.set_instance_transform(idx, scaled_transform)
+		idx += 1
+	# Bottom edge: horizontal walls along bottom of last row
+	for c in cols:
+		var pos = Vector3((c + 0.5) * cell_size, 0.0, rows * cell_size)
+		scaled_transform = Transform3D(Basis(), pos)
+		multimesh.set_instance_transform(idx, scaled_transform)
+		idx += 1
+	# Left edge: vertical walls along column 0
+	for r in rows:
+		var pos = Vector3(0.0, 0.0, (r + 0.5) * cell_size)
+		scaled_transform = Transform3D(Basis(), pos)
+		scaled_transform = scaled_transform.rotated_local(Vector3.UP, PI * 0.5)
+		multimesh.set_instance_transform(idx, scaled_transform)
+		idx += 1
+	# Right edge: vertical walls along right of last column
+	for r in rows:
+		var pos = Vector3(cols * cell_size, 0.0, (r + 0.5) * cell_size)
+		scaled_transform = Transform3D(Basis(), pos)
+		scaled_transform = scaled_transform.rotated_local(Vector3.UP, PI * 0.5)
+		multimesh.set_instance_transform(idx, scaled_transform)
+		idx += 1
 
 
 func rand_quant_rot(quantize:float=PI * .5) -> float:
