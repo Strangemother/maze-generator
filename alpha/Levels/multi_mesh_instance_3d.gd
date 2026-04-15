@@ -55,7 +55,7 @@ func spun_like_2(wallsData):
 		var row: int = a / cols
 		var col: int = a % cols
 		var pos: Vector3
-		var rot: float
+		var rot: float = 0.0
 		if diff == 1:
 			# Vertical wall on the right edge of cell a (runs along Z axis)
 			pos = Vector3((col + 1) * cell_size, 0.0, (row + 0.5) * cell_size)
