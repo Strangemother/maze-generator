@@ -15,6 +15,7 @@ albedo_color = Color(0.211117, 0.40455, 0.643137, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_2yvdw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_voj1p"]
+size = Vector3(1, 1, 0.1)
 
 [sub_resource type="MultiMesh" id="MultiMesh_voj1p"]
 transform_format = 1
