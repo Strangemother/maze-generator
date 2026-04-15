@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://bgm8slgh3fcj5"]
+
+[ext_resource type="PackedScene" uid="uid://vwr8ajoufse8" path="res://Controller/Player.tscn" id="1_611rl"]
+[ext_resource type="Environment" uid="uid://dybgim7p06ncg" path="res://Levels/BrightWorld.tres" id="1_s1ocm"]
+[ext_resource type="PackedScene" uid="uid://by545d6tu0ty4" path="res://Levels/Portal.tscn" id="20_4pr13"]
+[ext_resource type="PackedScene" uid="uid://bngabqv0l7eoo" path="res://Levels/OutOfBounds.tscn" id="20_mfgam"]
+[ext_resource type="FontFile" uid="uid://ij353qf6fdpf" path="res://UserInterface/Font/Staatliches-Regular.ttf" id="20_w1exm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fepxo"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.211117, 0.40455, 0.643137, 1)
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_s1ocm")
+
+[node name="FloorCSG" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1.5)
+material_override = SubResource("StandardMaterial3D_fepxo")
+use_collision = true
+size = Vector3(50, 1, 47)
+
+[node name="Pool3" type="CSGCylinder3D" parent="FloorCSG"]
+transform = Transform3D(0.667313, 0, 0.744778, 0, 1, 0, -0.744778, 0, 0.667313, 18.3637, -0.16913, -16.7333)
+operation = 2
+radius = 10.0
+height = 0.5
+
+[node name="Player" parent="." instance=ExtResource("1_611rl")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -12.4558, 1, 9.52878)
+base_speed = 10.0
+mouse_sensitivity = 0.001
+
+[node name="Portal" parent="." instance=ExtResource("20_4pr13")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.0679, 1.5, 21.8964)
+next_level = "res://Levels/DebugLevel.tscn"
+
+[node name="PortalLabel" type="Label3D" parent="Portal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65833, 1.61009)
+pixel_size = 0.008
+text = "Debug Room"
+font = ExtResource("20_w1exm")
+font_size = 96
+outline_size = 24
+
+[node name="OutOfBounds" parent="." instance=ExtResource("20_mfgam")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = 5.0
+autoplay = true
+bus = &"SFX"

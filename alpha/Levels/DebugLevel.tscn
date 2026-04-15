@@ -1,0 +1,1145 @@
+[gd_scene load_steps=35 format=3 uid="uid://bhgli0f8raw6h"]
+
+[ext_resource type="PackedScene" uid="uid://vwr8ajoufse8" path="res://Controller/Player.tscn" id="1_05f31"]
+[ext_resource type="Texture2D" uid="uid://clier55j2oocr" path="res://GDTVAssetPack/Textures/prototype-texture-with-size.png" id="1_crka7"]
+[ext_resource type="Texture2D" uid="uid://de2bsd506fj" path="res://GDTVAssetPack/Textures/prototype-texture.png" id="6_hoyj2"]
+[ext_resource type="PackedScene" uid="uid://by545d6tu0ty4" path="res://Levels/Portal.tscn" id="19_rhstb"]
+[ext_resource type="FontFile" uid="uid://ij353qf6fdpf" path="res://UserInterface/Font/Staatliches-Regular.ttf" id="20_vxu5d"]
+[ext_resource type="PackedScene" uid="uid://bngabqv0l7eoo" path="res://Levels/OutOfBounds.tscn" id="21_lvwi7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kxteu"]
+sky_top_color = Color(0.376471, 0.552941, 0.815686, 1)
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_energy_multiplier = 1.1
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_mdy2g"]
+sky_material = SubResource("ProceduralSkyMaterial_kxteu")
+
+[sub_resource type="Environment" id="Environment_tsp61"]
+background_mode = 2
+sky = SubResource("Sky_mdy2g")
+tonemap_mode = 2
+ssao_enabled = true
+ssil_enabled = true
+glow_enabled = true
+glow_bloom = 0.02
+glow_blend_mode = 0
+volumetric_fog_density = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f8j2a"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.517647, 0.517647, 0.517647, 1)
+albedo_texture = ExtResource("1_crka7")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xw44"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hqf5k"]
+material = SubResource("StandardMaterial3D_3xw44")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_in0et"]
+material = SubResource("StandardMaterial3D_3xw44")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.5
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lc4dk"]
+bounce = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bbe3q"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.741176, 0.141176, 0.141176, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_sofn3"]
+material = SubResource("StandardMaterial3D_bbe3q")
+radial_segments = 32
+rings = 16
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jffca"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ieu1y"]
+albedo_color = Color(0.501961, 0.741176, 0.819608, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oypjs"]
+albedo_color = Color(0.12549, 0.129412, 0.137255, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hnlco"]
+material = SubResource("StandardMaterial3D_ieu1y")
+size = Vector3(3, 0.25, 3)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8iluu"]
+points = PackedVector3Array(-1.5, -0.125, -1.5, -1.5, 0.125, -1.5, 1.5, -0.125, -1.5, -1.5, -0.125, 1.5, -1.5, 0.125, 1.5, 1.5, 0.125, -1.5, 1.5, -0.125, 1.5, 1.5, 0.125, 1.5)
+
+[sub_resource type="Animation" id="Animation_boywf"]
+resource_name = "Move"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0, 0.5, 1), Vector3(-6, 0.5, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ecljs"]
+resource_name = "Move_2"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0, 0.5, 1), Vector3(-6, 0.5, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5axvh"]
+resource_name = "Move_3"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4, 6.02),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector3(0, 0.5, 1), Vector3(0, 0.5, 5), Vector3(6, 0.5, 5), Vector3(6, 0.5, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3he08"]
+resource_name = "Move_4"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4, 6.02),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector3(0, 0.5, 1), Vector3(0, 2.5, 5), Vector3(6, 2.5, 5), Vector3(6, 0.5, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ufhgd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gxynm"]
+_data = {
+&"Move": SubResource("Animation_boywf"),
+&"Move_2": SubResource("Animation_ecljs"),
+&"Move_3": SubResource("Animation_5axvh"),
+&"Move_4": SubResource("Animation_3he08"),
+&"RESET": SubResource("Animation_ufhgd")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vartk"]
+albedo_texture = ExtResource("6_hoyj2")
+uv1_triplanar = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x5lxk"]
+material = SubResource("StandardMaterial3D_vartk")
+top_radius = 2.0
+bottom_radius = 2.0
+height = 0.25
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7p2p1"]
+height = 0.25
+radius = 2.0
+
+[sub_resource type="Animation" id="Animation_s6sin"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wasgs"]
+resource_name = "Spin"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gw5fu"]
+_data = {
+&"RESET": SubResource("Animation_s6sin"),
+&"Spin": SubResource("Animation_wasgs")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_adn6j"]
+albedo_color = Color(0.615686, 0.615686, 0.615686, 1)
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+visible = false
+directional_shadow_blend_splits = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tsp61")
+
+[node name="FloorCSG" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 2.5)
+material_override = SubResource("StandardMaterial3D_f8j2a")
+use_collision = true
+flip_faces = true
+size = Vector3(30, 10, 40)
+
+[node name="OverheadLight" type="OmniLight3D" parent="FloorCSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, 15)
+light_energy = 3.0
+light_specular = 0.25
+shadow_enabled = true
+shadow_blur = 1.5
+omni_range = 35.0
+omni_attenuation = 0.5
+
+[node name="LightOrb" type="MeshInstance3D" parent="FloorCSG/OverheadLight"]
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_hqf5k")
+skeleton = NodePath("")
+
+[node name="OverheadLight2" type="OmniLight3D" parent="FloorCSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5, -15)
+light_energy = 3.0
+light_specular = 0.25
+shadow_enabled = true
+shadow_blur = 1.5
+omni_range = 35.0
+omni_attenuation = 0.5
+
+[node name="LightOrb" type="MeshInstance3D" parent="FloorCSG/OverheadLight2"]
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_in0et")
+skeleton = NodePath("")
+
+[node name="OverheadLight3" type="OmniLight3D" parent="FloorCSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5, 15)
+light_energy = 3.0
+light_specular = 0.25
+shadow_enabled = true
+shadow_blur = 1.5
+omni_range = 35.0
+omni_attenuation = 0.5
+
+[node name="LightOrb" type="MeshInstance3D" parent="FloorCSG/OverheadLight3"]
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_hqf5k")
+skeleton = NodePath("")
+
+[node name="OverheadLight4" type="OmniLight3D" parent="FloorCSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, -15)
+light_energy = 3.0
+light_specular = 0.25
+shadow_enabled = true
+shadow_blur = 1.5
+omni_range = 35.0
+omni_attenuation = 0.5
+
+[node name="LightOrb" type="MeshInstance3D" parent="FloorCSG/OverheadLight4"]
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_hqf5k")
+skeleton = NodePath("")
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="FloorCSG"]
+size = Vector3(40, 20, 50)
+ambient_color = Color(0.501961, 0.741176, 0.819608, 1)
+ambient_color_energy = 3.0
+
+[node name="OneMeterJump" type="CSGBox3D" parent="FloorCSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75, -5.5, 3.25)
+flip_faces = true
+size = Vector3(2.5, 1, 3.5)
+
+[node name="TwoMeterJump" type="CSGBox3D" parent="FloorCSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -5.5, -0.25)
+flip_faces = true
+size = Vector3(3, 1, 3.5)
+
+[node name="ThreeMeterJump" type="CSGBox3D" parent="FloorCSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, -5.5, -3.75)
+flip_faces = true
+size = Vector3(4, 1, 3.5)
+
+[node name="FourMeterJump" type="CSGBox3D" parent="FloorCSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -5.5, -7.25)
+flip_faces = true
+size = Vector3(5, 1, 3.5)
+
+[node name="FiveMeterJump" type="CSGBox3D" parent="FloorCSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, -5.5, -10.75)
+flip_faces = true
+size = Vector3(6, 1, 3.5)
+
+[node name="SixMeterJump" type="CSGBox3D" parent="FloorCSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -5.5, -14.25)
+flip_faces = true
+size = Vector3(7, 1, 3.5)
+
+[node name="SevenMeterJump" type="CSGBox3D" parent="FloorCSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, -5.5, -17.75)
+flip_faces = true
+size = Vector3(8, 1, 3.5)
+
+[node name="BallBox" type="CSGBox3D" parent="FloorCSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -5, -1.5)
+flip_faces = true
+size = Vector3(2, 0.25, 2)
+
+[node name="RigidBodies" type="Node3D" parent="FloorCSG/BallBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, -0.2)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="FloorCSG/BallBox/RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.4, 0.55)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_lc4dk")
+can_sleep = false
+continuous_cd = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FloorCSG/BallBox/RigidBodies/RigidBody3D"]
+mesh = SubResource("SphereMesh_sofn3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorCSG/BallBox/RigidBodies/RigidBody3D"]
+shape = SubResource("SphereShape3D_jffca")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="FloorCSG/BallBox/RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.4, 0.554)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_lc4dk")
+can_sleep = false
+continuous_cd = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FloorCSG/BallBox/RigidBodies/RigidBody3D2"]
+mesh = SubResource("SphereMesh_sofn3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorCSG/BallBox/RigidBodies/RigidBody3D2"]
+shape = SubResource("SphereShape3D_jffca")
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="FloorCSG/BallBox/RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -0.35)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_lc4dk")
+can_sleep = false
+continuous_cd = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FloorCSG/BallBox/RigidBodies/RigidBody3D3"]
+mesh = SubResource("SphereMesh_sofn3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorCSG/BallBox/RigidBodies/RigidBody3D3"]
+shape = SubResource("SphereShape3D_jffca")
+
+[node name="BallBox2" type="CSGBox3D" parent="FloorCSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, -5, -1.5)
+flip_faces = true
+size = Vector3(2, 0.25, 2)
+
+[node name="RigidBodies" type="Node3D" parent="FloorCSG/BallBox2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, -0.2)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="FloorCSG/BallBox2/RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.4, 0.55)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_lc4dk")
+can_sleep = false
+continuous_cd = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FloorCSG/BallBox2/RigidBodies/RigidBody3D"]
+mesh = SubResource("SphereMesh_sofn3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorCSG/BallBox2/RigidBodies/RigidBody3D"]
+shape = SubResource("SphereShape3D_jffca")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="FloorCSG/BallBox2/RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.4, 0.554)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_lc4dk")
+can_sleep = false
+continuous_cd = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FloorCSG/BallBox2/RigidBodies/RigidBody3D2"]
+mesh = SubResource("SphereMesh_sofn3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorCSG/BallBox2/RigidBodies/RigidBody3D2"]
+shape = SubResource("SphereShape3D_jffca")
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="FloorCSG/BallBox2/RigidBodies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -0.35)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_lc4dk")
+can_sleep = false
+continuous_cd = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FloorCSG/BallBox2/RigidBodies/RigidBody3D3"]
+mesh = SubResource("SphereMesh_sofn3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorCSG/BallBox2/RigidBodies/RigidBody3D3"]
+shape = SubResource("SphereShape3D_jffca")
+
+[node name="Player" parent="." instance=ExtResource("1_05f31")]
+transform = Transform3D(1, 0, 1.74845e-07, 0, 1, 0, -1.74845e-07, 0, 1, 10.5442, 1, 18.5288)
+
+[node name="Portal" parent="." instance=ExtResource("19_rhstb")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.0679, 1.5, 21.8964)
+next_level = "res://Levels/TestLevel.tscn"
+
+[node name="PortalLabel" type="Label3D" parent="Portal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65833, 1.61009)
+pixel_size = 0.008
+text = "Demo"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="OutOfBounds" parent="." instance=ExtResource("21_lvwi7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+
+[node name="LongJump" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.5)
+
+[node name="FrontBar" type="CSGBox3D" parent="LongJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, -0.5, 16.25)
+use_collision = true
+size = Vector3(0.5, 1, 3.5)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="FrontBar2" type="CSGBox3D" parent="LongJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.5, 12.75)
+use_collision = true
+size = Vector3(0.5, 1, 3.5)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="FrontBar3" type="CSGBox3D" parent="LongJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -0.5, 9.25)
+use_collision = true
+size = Vector3(0.5, 1, 3.5)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="FrontBar4" type="CSGBox3D" parent="LongJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, -0.5, 5.75)
+use_collision = true
+size = Vector3(0.5, 1, 3.5)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="FrontBar5" type="CSGBox3D" parent="LongJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, -0.5, 2.25)
+use_collision = true
+size = Vector3(0.5, 1, 3.5)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="FrontBar6" type="CSGBox3D" parent="LongJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25, -0.5, -1.25)
+use_collision = true
+size = Vector3(0.5, 1, 3.5)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="FrontBar7" type="CSGBox3D" parent="LongJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.25, -0.5, -4.75)
+use_collision = true
+size = Vector3(0.5, 1, 3.5)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="Label3D" type="Label3D" parent="LongJump"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.9, 2.8, 5.75)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "4.0m"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="Label3D2" type="Label3D" parent="LongJump"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.95, 2.8, 9.25)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "3.0m"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="Label3D3" type="Label3D" parent="LongJump"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.95, 2.8, 12.75)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "2.0m"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="Label3D4" type="Label3D" parent="LongJump"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.95, 2.8, 16.25)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "1.5m"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="Label3D5" type="Label3D" parent="LongJump"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.9, 2.8, 2.25)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "5.0m"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="Label3D6" type="Label3D" parent="LongJump"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.9, 2.8, -1.25)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "6.0m"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="Label3D7" type="Label3D" parent="LongJump"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.9, 2.8, -4.75)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "7.0m"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="Side" type="CSGBox3D" parent="LongJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.25, 18.5)
+use_collision = true
+size = Vector3(8, 0.5, 1)
+material = SubResource("StandardMaterial3D_f8j2a")
+
+[node name="Side2" type="CSGBox3D" parent="LongJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.25, -6.75)
+use_collision = true
+size = Vector3(8, 0.5, 0.5)
+material = SubResource("StandardMaterial3D_f8j2a")
+
+[node name="JumpLine" type="CSGBox3D" parent="LongJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25, -0.5, 5.75)
+use_collision = true
+size = Vector3(0.5, 1, 24.5)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="InfoBoard2" type="CSGBox3D" parent="LongJump"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 5, 1.5, -7)
+size = Vector3(3, 2, 0.1)
+material = SubResource("StandardMaterial3D_oypjs")
+
+[node name="LongJumpTitle" type="Label3D" parent="LongJump/InfoBoard2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.9, 0.8, -0.1)
+pixel_size = 0.002
+double_sided = false
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "Long Jump"
+font = ExtResource("20_vxu5d")
+font_size = 120
+outline_size = 32
+
+[node name="LongJumpInfo" type="Label3D" parent="LongJump/InfoBoard2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, -0.1, -0.1)
+pixel_size = 0.002
+double_sided = false
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "Test the length of your jump:
+	- Default Maximum = 5m.
+	- Hold jump to reach max height.
+	- This is a component of your player's speed and jump height."
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+horizontal_alignment = 0
+autowrap_mode = 2
+width = 1200.0
+
+[node name="InfoBoard" type="CSGBox3D" parent="LongJump/InfoBoard2"]
+size = Vector3(3.1, 2.1, 0.05)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="HighJump" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 16)
+
+[node name="LowBox" type="CSGBox3D" parent="HighJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.25, 4.5)
+use_collision = true
+size = Vector3(3, 0.5, 3)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="Label3D" type="Label3D" parent="HighJump/LowBox"]
+transform = Transform3D(-5.73205e-15, -1, -4.37114e-08, 1.31134e-07, -4.37114e-08, 1, -1, 0, 1.31134e-07, 0, 0.3, 0)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "0.5m"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="LowBox2" type="CSGBox3D" parent="HighJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.25, -0.5)
+use_collision = true
+size = Vector3(3, 0.5, 3)
+material = SubResource("StandardMaterial3D_f8j2a")
+
+[node name="LowBox3" type="CSGBox3D" parent="HighJump/LowBox2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+use_collision = true
+size = Vector3(3, 0.5, 3)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="Label3D" type="Label3D" parent="HighJump/LowBox2/LowBox3"]
+transform = Transform3D(-5.73205e-15, -1, -4.37114e-08, 1.31134e-07, -4.37114e-08, 1, -1, 0, 1.31134e-07, 0, 0.3, 0)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "1.0m"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="LowBox3" type="CSGBox3D" parent="HighJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.5, -5.5)
+use_collision = true
+size = Vector3(3, 1, 3)
+material = SubResource("StandardMaterial3D_f8j2a")
+
+[node name="LowBox3" type="CSGBox3D" parent="HighJump/LowBox3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+use_collision = true
+size = Vector3(3, 0.5, 3)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="Label3D" type="Label3D" parent="HighJump/LowBox3/LowBox3"]
+transform = Transform3D(-5.73205e-15, -1, -4.37114e-08, 1.31134e-07, -4.37114e-08, 1, -1, 0, 1.31134e-07, 0, 0.3, 0)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "1.5m"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="LowBox6" type="CSGBox3D" parent="HighJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.75, -5.5)
+use_collision = true
+size = Vector3(3, 1.5, 3)
+material = SubResource("StandardMaterial3D_f8j2a")
+
+[node name="LowBox3" type="CSGBox3D" parent="HighJump/LowBox6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+use_collision = true
+size = Vector3(3, 0.5, 3)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="Label3D" type="Label3D" parent="HighJump/LowBox6/LowBox3"]
+transform = Transform3D(-5.73205e-15, -1, -4.37114e-08, 1.31134e-07, -4.37114e-08, 1, -1, 0, 1.31134e-07, 0, 0.3, 0)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "2.0m"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="LowBox5" type="CSGBox3D" parent="HighJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -0.5)
+use_collision = true
+size = Vector3(3, 2, 3)
+material = SubResource("StandardMaterial3D_f8j2a")
+
+[node name="LowBox3" type="CSGBox3D" parent="HighJump/LowBox5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+use_collision = true
+size = Vector3(3, 0.5, 3)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="Label3D" type="Label3D" parent="HighJump/LowBox5/LowBox3"]
+transform = Transform3D(-5.73205e-15, -1, -4.37114e-08, 1.31134e-07, -4.37114e-08, 1, -1, 0, 1.31134e-07, 0, 0.3, 0)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "2.5m"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="LowBox4" type="CSGBox3D" parent="HighJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.25, 4.5)
+use_collision = true
+size = Vector3(3, 2.5, 3)
+material = SubResource("StandardMaterial3D_f8j2a")
+
+[node name="LowBox3" type="CSGBox3D" parent="HighJump/LowBox4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+use_collision = true
+size = Vector3(3, 0.5, 3)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="Label3D" type="Label3D" parent="HighJump/LowBox4/LowBox3"]
+transform = Transform3D(-5.73205e-15, -1, -4.37114e-08, 1.31134e-07, -4.37114e-08, 1, -1, 0, 1.31134e-07, 0, 0.3, 0)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "3.0m"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="InfoBoard" type="CSGBox3D" parent="HighJump"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.5, 6.5)
+size = Vector3(3, 2, 0.1)
+material = SubResource("StandardMaterial3D_oypjs")
+
+[node name="HighJumpTitle" type="Label3D" parent="HighJump/InfoBoard"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.9, 0.8, -0.1)
+pixel_size = 0.002
+double_sided = false
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "High Jump"
+font = ExtResource("20_vxu5d")
+font_size = 120
+outline_size = 32
+
+[node name="HighJumpInfo" type="Label3D" parent="HighJump/InfoBoard"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, -0.1, -0.1)
+pixel_size = 0.002
+double_sided = false
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "Test your Jump height:
+	- Default maximum = 1.2m.
+	- Hold jump to reach max height.
+	- Release jump to do a shorter hop."
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+horizontal_alignment = 0
+autowrap_mode = 2
+width = 1200.0
+
+[node name="InfoBoard" type="CSGBox3D" parent="HighJump/InfoBoard"]
+size = Vector3(3.1, 2.1, 0.05)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="MovingPlatforms" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 21.9, 0, 2.5)
+
+[node name="Platform2" type="Node3D" parent="MovingPlatforms"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -1, 2, 1)
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="MovingPlatforms/Platform2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/Platform2/AnimatableBody3D"]
+mesh = SubResource("BoxMesh_hnlco")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/Platform2/AnimatableBody3D"]
+shape = SubResource("ConvexPolygonShape3D_8iluu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/Platform2/AnimatableBody3D"]
+libraries = {
+"": SubResource("AnimationLibrary_gxynm")
+}
+autoplay = "Move_2"
+
+[node name="Platform6" type="Node3D" parent="MovingPlatforms"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -4.5, 0, 1)
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="MovingPlatforms/Platform6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/Platform6/AnimatableBody3D"]
+mesh = SubResource("BoxMesh_hnlco")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/Platform6/AnimatableBody3D"]
+shape = SubResource("ConvexPolygonShape3D_8iluu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/Platform6/AnimatableBody3D"]
+libraries = {
+"": SubResource("AnimationLibrary_gxynm")
+}
+autoplay = "Move_2"
+speed_scale = 0.5
+
+[node name="Platform9" type="Node3D" parent="MovingPlatforms"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -17, 0, 1)
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="MovingPlatforms/Platform9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/Platform9/AnimatableBody3D"]
+mesh = SubResource("BoxMesh_hnlco")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/Platform9/AnimatableBody3D"]
+shape = SubResource("ConvexPolygonShape3D_8iluu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/Platform9/AnimatableBody3D"]
+libraries = {
+"": SubResource("AnimationLibrary_gxynm")
+}
+autoplay = "Move_2"
+speed_scale = 1.5
+
+[node name="Platform7" type="Node3D" parent="MovingPlatforms"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -4.5, 2.5, -5)
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="MovingPlatforms/Platform7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/Platform7/AnimatableBody3D"]
+mesh = SubResource("BoxMesh_hnlco")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/Platform7/AnimatableBody3D"]
+shape = SubResource("ConvexPolygonShape3D_8iluu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/Platform7/AnimatableBody3D"]
+libraries = {
+"": SubResource("AnimationLibrary_gxynm")
+}
+autoplay = "Move_3"
+speed_scale = 0.8
+
+[node name="Platform8" type="Node3D" parent="MovingPlatforms"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -12.5, 3, -5)
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="MovingPlatforms/Platform8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/Platform8/AnimatableBody3D"]
+mesh = SubResource("BoxMesh_hnlco")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/Platform8/AnimatableBody3D"]
+shape = SubResource("ConvexPolygonShape3D_8iluu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/Platform8/AnimatableBody3D"]
+libraries = {
+"": SubResource("AnimationLibrary_gxynm")
+}
+autoplay = "Move_4"
+speed_scale = 1.2
+
+[node name="TurnTable1" type="CSGCylinder3D" parent="MovingPlatforms"]
+transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, -9.5, 0.125, 0.6)
+material_override = SubResource("StandardMaterial3D_ieu1y")
+use_collision = true
+height = 0.25
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="MovingPlatforms/TurnTable1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/TurnTable1/AnimatableBody3D"]
+mesh = SubResource("CylinderMesh_x5lxk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/TurnTable1/AnimatableBody3D"]
+shape = SubResource("CylinderShape3D_7p2p1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/TurnTable1/AnimatableBody3D"]
+libraries = {
+"": SubResource("AnimationLibrary_gw5fu")
+}
+autoplay = "Spin"
+
+[node name="TurnTable2" type="CSGCylinder3D" parent="MovingPlatforms"]
+transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, -13.5, 0.125, -1.4)
+material_override = SubResource("StandardMaterial3D_ieu1y")
+use_collision = true
+height = 0.25
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="MovingPlatforms/TurnTable2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/TurnTable2/AnimatableBody3D"]
+mesh = SubResource("CylinderMesh_x5lxk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/TurnTable2/AnimatableBody3D"]
+shape = SubResource("CylinderShape3D_7p2p1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/TurnTable2/AnimatableBody3D"]
+libraries = {
+"": SubResource("AnimationLibrary_gw5fu")
+}
+autoplay = "Spin"
+speed_scale = -1.0
+
+[node name="FakeStairs" type="CSGPolygon3D" parent="MovingPlatforms"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3.00001, 0, 0.1)
+use_collision = true
+polygon = PackedVector2Array(-2, 0, 0, 2, 0, 0)
+depth = 3.0
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="Label3D" type="Label3D" parent="MovingPlatforms/FakeStairs"]
+transform = Transform3D(1, 0, -1.74845e-07, 0, 1, 0, 1.74845e-07, 0, 1, 1.40001, 1, 0.0499992)
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "Fake Stairs
+It's a slope"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="FakeStairs" type="Node3D" parent="MovingPlatforms/FakeStairs"]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="MovingPlatforms/FakeStairs/FakeStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 0.1, -1.5)
+size = Vector3(0.22, 0.22, 3.1)
+material = SubResource("StandardMaterial3D_adn6j")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="MovingPlatforms/FakeStairs/FakeStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 0.3, -1.5)
+size = Vector3(0.22, 0.22, 3.1)
+material = SubResource("StandardMaterial3D_adn6j")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="MovingPlatforms/FakeStairs/FakeStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.5, -1.5)
+size = Vector3(0.22, 0.22, 3.1)
+material = SubResource("StandardMaterial3D_adn6j")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="MovingPlatforms/FakeStairs/FakeStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0.7, -1.5)
+size = Vector3(0.22, 0.22, 3.1)
+material = SubResource("StandardMaterial3D_adn6j")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="MovingPlatforms/FakeStairs/FakeStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0.9, -1.5)
+size = Vector3(0.22, 0.22, 3.1)
+material = SubResource("StandardMaterial3D_adn6j")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="MovingPlatforms/FakeStairs/FakeStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.900002, 1.1, -1.5)
+size = Vector3(0.22, 0.22, 3.1)
+material = SubResource("StandardMaterial3D_adn6j")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="MovingPlatforms/FakeStairs/FakeStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.700002, 1.3, -1.5)
+size = Vector3(0.22, 0.22, 3.1)
+material = SubResource("StandardMaterial3D_adn6j")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="MovingPlatforms/FakeStairs/FakeStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.500002, 1.5, -1.5)
+size = Vector3(0.22, 0.22, 3.1)
+material = SubResource("StandardMaterial3D_adn6j")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="MovingPlatforms/FakeStairs/FakeStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300002, 1.7, -1.5)
+size = Vector3(0.22, 0.22, 3.1)
+material = SubResource("StandardMaterial3D_adn6j")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="MovingPlatforms/FakeStairs/FakeStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100002, 1.9, -1.5)
+size = Vector3(0.22, 0.22, 3.1)
+material = SubResource("StandardMaterial3D_adn6j")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MovingPlatforms/FakeStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, -1.5)
+size = Vector3(3, 2, 3)
+material = SubResource("StandardMaterial3D_f8j2a")
+
+[node name="InfoBoard3" type="CSGBox3D" parent="MovingPlatforms"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 1.5, -7)
+size = Vector3(3, 2, 0.1)
+material = SubResource("StandardMaterial3D_oypjs")
+
+[node name="PlatformTitle" type="Label3D" parent="MovingPlatforms/InfoBoard3"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.599999, 0.8, -0.1)
+pixel_size = 0.002
+double_sided = false
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "Moving Platforms"
+font = ExtResource("20_vxu5d")
+font_size = 120
+outline_size = 32
+
+[node name="SlopeInfo" type="Label3D" parent="MovingPlatforms/InfoBoard3"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.999998, 0, -0.1)
+pixel_size = 0.002
+double_sided = false
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "Test control on Moving floors:
+	- Player motion syncs with platform motion and rotation.
+	- Animatable Bodies can push objects through static bodies."
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+horizontal_alignment = 0
+autowrap_mode = 2
+width = 1200.0
+
+[node name="InfoBoard" type="CSGBox3D" parent="MovingPlatforms/InfoBoard3"]
+size = Vector3(3.1, 2.1, 0.05)
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="SlopeTest" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, -13)
+
+[node name="15DegSlope" type="CSGPolygon3D" parent="SlopeTest"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.00001, 0, -7.4)
+use_collision = true
+polygon = PackedVector2Array(-2, 0, -1.73495, 0.0647879, 0, 0.54, 0, 0)
+depth = 3.0
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="SlopeTest/15DegSlope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0.27, -1.5)
+size = Vector3(2.5, 0.54, 3)
+material = SubResource("StandardMaterial3D_f8j2a")
+
+[node name="Label3D" type="Label3D" parent="SlopeTest/15DegSlope"]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 2.40001, 2.3, -1.75)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "15º"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="30DegSlope" type="CSGPolygon3D" parent="SlopeTest"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.00001, 0, -11)
+use_collision = true
+polygon = PackedVector2Array(-2, 0, 0, 1.15, 0, 0)
+depth = 3.0
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="SlopeTest/30DegSlope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0.575, -1.5)
+size = Vector3(2.5, 1.15, 3)
+material = SubResource("StandardMaterial3D_f8j2a")
+
+[node name="Label3D" type="Label3D" parent="SlopeTest/30DegSlope"]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 2.40001, 2.9, -1.75)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "30º"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="45DegSlope" type="CSGPolygon3D" parent="SlopeTest"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.00001, 0, -14.5)
+use_collision = true
+polygon = PackedVector2Array(-2, 0, 0, 2, 0, 0)
+depth = 3.0
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="SlopeTest/45DegSlope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 1, -1.5)
+size = Vector3(2.5, 2, 3)
+material = SubResource("StandardMaterial3D_f8j2a")
+
+[node name="Label3D" type="Label3D" parent="SlopeTest/45DegSlope"]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 2.40001, 3.8, -1.75)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "45º"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="60DegSlope" type="CSGPolygon3D" parent="SlopeTest"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.00001, 0, -18)
+use_collision = true
+polygon = PackedVector2Array(-2, 0, 0, 3.46, 0, 0)
+depth = 3.0
+material = SubResource("StandardMaterial3D_ieu1y")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="SlopeTest/60DegSlope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 1.73, -1.5)
+size = Vector3(2.5, 3.46, 3)
+material = SubResource("StandardMaterial3D_f8j2a")
+
+[node name="Label3D" type="Label3D" parent="SlopeTest/60DegSlope"]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 2.40001, 5.4, -1.75)
+pixel_size = 0.008
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "60º"
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+
+[node name="InfoBoard2" type="CSGBox3D" parent="SlopeTest"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.5, 1.5, -2)
+size = Vector3(3, 2, 0.1)
+material = SubResource("StandardMaterial3D_oypjs")
+
+[node name="SlopeTitle" type="Label3D" parent="SlopeTest/InfoBoard2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.799999, 0.8, -0.1)
+pixel_size = 0.002
+double_sided = false
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "Slope Climb"
+font = ExtResource("20_vxu5d")
+font_size = 120
+outline_size = 32
+
+[node name="SlopeInfo" type="Label3D" parent="SlopeTest/InfoBoard2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.999998, 0.1, -0.1)
+pixel_size = 0.002
+double_sided = false
+outline_modulate = Color(0.12549, 0.145098, 0.211765, 1)
+text = "Test control on slopes:
+	- Default MAX CLimb =  50º.
+	- The body reamains still on slopes below the max climb."
+font = ExtResource("20_vxu5d")
+font_size = 96
+outline_size = 24
+horizontal_alignment = 0
+autowrap_mode = 2
+width = 1200.0
+
+[node name="InfoBoard" type="CSGBox3D" parent="SlopeTest/InfoBoard2"]
+size = Vector3(3.1, 2.1, 0.05)
+material = SubResource("StandardMaterial3D_ieu1y")
