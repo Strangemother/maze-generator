@@ -43,24 +43,37 @@ func spun_like_2(wallsData):
 	# Maybe not all of them should be visible at first.
 	multimesh.visible_instance_count = min(lw, 1000)
 	#multimesh.scale = Vector3(.2,.2,1)
-	var size: int = 20 
-	var scaled_transform : Transform3D
-	# var quantize =  (PI * .5)
+	var cols: int = wallsData["meta"]["cols"]
+	var cell_size: float = 1.0
+	var scaled_transform: Transform3D
 	# Set the transform of the instances.
 	for i in multimesh.visible_instance_count:
 		var wall = walls[i]
-		var pos:Vector3 = Vector3(randf_range(-size, size), 0, randf_range(-size, size))
+		var a: int = wall[0]
+		var b: int = wall[1]
+		var diff: int = b - a
+		var row: int = a / cols
+		var col: int = a % cols
+		var pos: Vector3
+		var rot: float
+		if diff == 1:
+			# Vertical wall on the right edge of cell a (runs along Z axis)
+			pos = Vector3((col + 1) * cell_size, 0.0, (row + 0.5) * cell_size)
+			rot = 0.0
+		else:
+			# Horizontal wall on the bottom edge of cell a (runs along X axis)
+			pos = Vector3((col + 0.5) * cell_size, 0.0, (row + 1) * cell_size)
+			rot = PI * 0.5
 		scaled_transform = Transform3D(Basis(), pos)
-		#scaled_transform = scaled_transform.scaled(Vector3(.5, 1, .1))
-		#scaled_transform = scaled_transform.rotated(Vector3.LEFT, randf_range(0, PI * 2))
-		var rot = rand_quant_rot()
 		scaled_transform = scaled_transform.rotated(Vector3.UP, rot)
 		multimesh.set_instance_transform(i, scaled_transform)
+
 
 func rand_quant_rot(quantize:float=PI * .5) -> float:
 	var rot = randf_range(0, PI * 2)
 	rot = round(rot / quantize) * quantize; 
 	return rot 
+
 
 func spun_like():
 	# Create the multimesh.
