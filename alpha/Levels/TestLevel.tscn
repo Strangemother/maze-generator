@@ -1,11 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgm8slgh3fcj5"]
+[gd_scene load_steps=9 format=3 uid="uid://bgm8slgh3fcj5"]
 
 [ext_resource type="PackedScene" uid="uid://vwr8ajoufse8" path="res://Controller/Player.tscn" id="1_611rl"]
 [ext_resource type="Environment" uid="uid://dybgim7p06ncg" path="res://Levels/BrightWorld.tres" id="1_s1ocm"]
 [ext_resource type="Script" uid="uid://c8iw1p1xk1bxv" path="res://Levels/multi_mesh_instance_3d.gd" id="6_voj1p"]
-[ext_resource type="PackedScene" uid="uid://by545d6tu0ty4" path="res://Levels/Portal.tscn" id="20_4pr13"]
 [ext_resource type="PackedScene" uid="uid://bngabqv0l7eoo" path="res://Levels/OutOfBounds.tscn" id="20_mfgam"]
-[ext_resource type="FontFile" uid="uid://ij353qf6fdpf" path="res://UserInterface/Font/Staatliches-Regular.ttf" id="20_w1exm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fepxo"]
 diffuse_mode = 3
@@ -36,6 +34,7 @@ size = Vector3(50, 1, 47)
 
 [node name="Pool3" type="CSGCylinder3D" parent="FloorCSG"]
 transform = Transform3D(0.667313, 0, 0.744778, 0, 1, 0, -0.744778, 0, 0.667313, 18.3637, -0.16913, -16.7333)
+visible = false
 operation = 2
 radius = 10.0
 height = 0.5
@@ -44,18 +43,6 @@ height = 0.5
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -12.4558, 1, 9.52878)
 base_speed = 10.0
 mouse_sensitivity = 0.001
-
-[node name="Portal" parent="." instance=ExtResource("20_4pr13")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.0679, 1.5, 21.8964)
-next_level = "res://Levels/DebugLevel.tscn"
-
-[node name="PortalLabel" type="Label3D" parent="Portal"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65833, 1.61009)
-pixel_size = 0.008
-text = "Debug Room"
-font = ExtResource("20_w1exm")
-font_size = 96
-outline_size = 24
 
 [node name="OutOfBounds" parent="." instance=ExtResource("20_mfgam")]
 
@@ -77,4 +64,5 @@ script = ExtResource("6_voj1p")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91172, 0, 0)
+visible = false
 mesh = SubResource("BoxMesh_voj1p")
