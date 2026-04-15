@@ -58,13 +58,13 @@ func spun_like_2(wallsData):
 		var rot: float = 0.0
 		if diff == 1:
 			# Vertical wall on the right edge of cell a (runs along Z axis)
-			# JS: moveTo(col+1, row) → lineTo(col+1, row+1)
-			pos = Vector3((col + 1) * cell_size, 0.0, row * cell_size)
+			# JS: (col+1, row) → (col+1, row+1), midpoint at row+0.5
+			pos = Vector3((col + 1) * cell_size, 0.0, (row + 0.5) * cell_size)
 			rot = 0.0
 		else:
 			# Horizontal wall on the bottom edge of cell a (runs along X axis)
-			# JS: moveTo(col, row+1) → lineTo(col+1, row+1)
-			pos = Vector3(col * cell_size, 0.0, (row + 1) * cell_size)
+			# JS: (col, row+1) → (col+1, row+1), midpoint at col+0.5
+			pos = Vector3((col + 0.5) * cell_size, 0.0, (row + 1) * cell_size)
 			rot = PI * 0.5
 		scaled_transform = Transform3D(Basis(), pos)
 		scaled_transform = scaled_transform.rotated_local(Vector3.UP, rot)
