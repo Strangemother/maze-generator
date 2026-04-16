@@ -1,8 +1,10 @@
 extends MultiMeshInstance3D
 
-func load_from_file(name="tiny-walls.json") -> Dictionary:
+@export var json_filename = "res://Data/mid-walls.json"
+
+func load_from_file(res_path=json_filename) -> Dictionary:
 	var json = JSON.new()
-	var content_str = FileAccess.get_file_as_string("res://Data/" + name)
+	var content_str = FileAccess.get_file_as_string(res_path)
 	var content:Dictionary = JSON.parse_string(content_str)
 	return content
 
