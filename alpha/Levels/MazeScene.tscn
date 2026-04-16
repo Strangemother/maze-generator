@@ -35,5 +35,6 @@ mouse_sensitivity = 0.001
 [node name="Maze" parent="." instance=ExtResource("5_krklf")]
 
 [node name="MazeCollision" parent="." instance=ExtResource("6_vt7by")]
+transform = Transform3D(1, 0, 0, 0, 1.045, 0, 0, 0, 0.946, 0, 0, 0)
 json_file = "res://Data/tiny-3-walls.json"
 player_path = NodePath("../Player")
