@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://ct1dnfkkfdgu1"]
+
+[ext_resource type="Texture2D" uid="uid://ca14skqgfmbsu" path="res://assets/wall.png" id="1_yuvd5"]
+[ext_resource type="Script" uid="uid://c8iw1p1xk1bxv" path="res://Levels/multi_mesh_instance_3d.gd" id="2_hdl3g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kv5fy"]
+albedo_texture = ExtResource("1_yuvd5")
+uv1_scale = Vector3(8, 4, 1)
+uv2_scale = Vector3(3, 3, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_voj1p"]
+material = SubResource("StandardMaterial3D_kv5fy")
+size = Vector3(2, 1, 0.1)
+
+[sub_resource type="MultiMesh" id="MultiMesh_7hfkg"]
+transform_format = 1
+instance_count = 10
+mesh = SubResource("BoxMesh_voj1p")
+buffer = PackedFloat32Array(0, 0, 1.001, -5.54338, 0, -1.001, 0, -0.574163, 1.001, 0, 0, 30.6201, 0, 0, 1.001, 4.27643, 0, -1.001, 0, -0.574163, 1.001, 0, 0, 50.7123, -1.001, 0, 0, 40.3932, 0, 1.001, 0, -0.382775, 0, 0, -1.001, 29.3155, -1.001, 0, 0, -5.26432, 0, 1.001, 0, -0.382775, 0, 0, -1.001, -1.85405, 1.001, 0, 0, 44.5367, 0, -1.001, 0, -0.574163, 0, 0, -1.001, 45.6241, 0, 0, -1.001, 59.5931, 0, 1.001, 0, -0.382775, 1.001, 0, 0, 56.0889, -1.001, 0, 0, -4.48118, 0, 1.001, 0, -0.382775, 0, 0, -1.001, -0.132132, 0, 0, 1.001, 2.06726, 0, -1.001, 0, -0.574163, 1.001, 0, 0, 45.0709, 0, 0, -1.001, 59.1221, 0, 1.001, 0, -0.382775, 1.001, 0, 0, 62.0413, 0, 0, -1.001, 56.6578, 0, 1.001, 0, -0.382775, 1.001, 0, 0, 26.1679)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jyvk6"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 3.0
+radial_segments = 7
+rings = 1
+
+[node name="Node" type="Node"]
+
+[node name="MazeWallMultiMesh" type="MultiMeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.045, 0, 0, 0, 0.946, 0, 0, 0)
+multimesh = SubResource("MultiMesh_7hfkg")
+script = ExtResource("2_hdl3g")
+json_file = "res://Data/alt-broken-paths-as-walls.json"
+
+[node name="WallUnit" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000187516, 2.15859, 0)
+visible = false
+mesh = SubResource("BoxMesh_voj1p")
+skeleton = NodePath("../../root/@EditorNode@21272/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@54/@VBoxContainer@55/@EditorMainScreen@102/MainScreen/@CanvasItemEditor@11482/@VSplitContainer@11134/@HSplitContainer@11136/@HSplitContainer@11138/@Control@11139/@SubViewportContainer@11140/@SubViewport@11141/TestLevel")
+
+[node name="NorthPole" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_jyvk6")
+skeleton = NodePath("../../root/@EditorNode@21272/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@54/@VBoxContainer@55/@EditorMainScreen@102/MainScreen/@CanvasItemEditor@11482/@VSplitContainer@11134/@HSplitContainer@11136/@HSplitContainer@11138/@Control@11139/@SubViewportContainer@11140/@SubViewport@11141/TestLevel")
