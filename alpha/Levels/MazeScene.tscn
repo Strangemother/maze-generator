@@ -1,12 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwyygykhqrndj"]
+[gd_scene load_steps=8 format=3 uid="uid://bwyygykhqrndj"]
 
 [ext_resource type="Environment" uid="uid://dybgim7p06ncg" path="res://Levels/BrightWorld.tres" id="1_vt7by"]
 [ext_resource type="Texture2D" uid="uid://cd0hxvarmnxff" path="res://assets/carpet.jpg" id="2_7bnf8"]
 [ext_resource type="Script" uid="uid://diol7e5kpdvm2" path="res://Levels/pseudo_floor.gd" id="3_o2mva"]
 [ext_resource type="PackedScene" uid="uid://vwr8ajoufse8" path="res://Controller/Player.tscn" id="4_priw0"]
 [ext_resource type="PackedScene" uid="uid://ct1dnfkkfdgu1" path="res://Scenes/Maze.tscn" id="5_krklf"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_2yvdw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_voj1p"]
 albedo_texture = ExtResource("2_7bnf8")
@@ -16,16 +14,10 @@ uv2_scale = Vector3(0.3, 0.3, 0.3)
 [sub_resource type="BoxMesh" id="BoxMesh_jyvk6"]
 size = Vector3(80, 0.2, 80)
 
-[node name="TestLevel" type="Node3D"]
+[node name="MazeScene" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_vt7by")
-
-[node name="MeshFloor" type="MeshInstance3D" parent="."]
-transform = Transform3D(24.7982, 0, 0, 0, 1.14416, 0, 0, 0, 25.8537, 16.225, 0, 12.451)
-visible = false
-mesh = SubResource("PlaneMesh_2yvdw")
-skeleton = NodePath("../../../../../../../../../../../../../../../../../../../../../../Node/MazeWallMultiMesh")
 
 [node name="PseudoFloor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.3831, -0.5, 35.5028)

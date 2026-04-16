@@ -3,7 +3,7 @@ extends MultiMeshInstance3D
 @export var json_file: String = "res://Data/mid-walls.json"
 
 func load_from_file(res_path=json_file) -> Dictionary:
-	var json = JSON.new()
+	#var json = JSON.new()
 	var content_str = FileAccess.get_file_as_string(res_path)
 	var content:Dictionary = JSON.parse_string(content_str)
 	return content
