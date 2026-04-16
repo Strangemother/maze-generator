@@ -85,6 +85,7 @@ mouse_sensitivity = 0.001
 transform = Transform3D(1, 0, 0, 0, 1.045, 0, 0, 0, 0.946, 0, 0, 0)
 multimesh = SubResource("MultiMesh_voj1p")
 script = ExtResource("6_voj1p")
+json_file = "res://Data/tiny-3-walls.json"
 
 [node name="WallUnit" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000187516, 2.15859, 0)

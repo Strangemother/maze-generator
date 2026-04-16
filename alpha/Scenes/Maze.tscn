@@ -31,6 +31,7 @@ rings = 1
 transform = Transform3D(1, 0, 0, 0, 1.045, 0, 0, 0, 0.946, 0, 0, 0)
 multimesh = SubResource("MultiMesh_7hfkg")
 script = ExtResource("2_hdl3g")
+json_file = "res://Data/alt-broken-paths-as-walls.json"
 
 [node name="WallUnit" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000187516, 2.15859, 0)
