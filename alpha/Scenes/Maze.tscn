@@ -20,7 +20,6 @@ height = 5.0
 [node name="Node" type="Node"]
 
 [node name="MazeWallMultiMesh" type="MultiMeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.045, 0, 0, 0, 0.946, 0, 0, 0)
 multimesh = SubResource("MultiMesh_yuvd5")
 script = ExtResource("2_hdl3g")
 json_file = "res://Data/tiny-3-walls.json"

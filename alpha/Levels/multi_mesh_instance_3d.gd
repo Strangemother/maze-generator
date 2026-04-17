@@ -3,14 +3,13 @@ extends MultiMeshInstance3D
 @export var json_file: String = "res://Data/mid-walls.json"
 
 func load_from_file(res_path=json_file) -> Dictionary:
-	#var json = JSON.new()
 	var content_str = FileAccess.get_file_as_string(res_path)
 	var content:Dictionary = JSON.parse_string(content_str)
 	return content
 
 func _ready():
 	render_walls()
-	
+
 func render_walls():
 	"""
 	In the grid every cell has up to 4 neighbours (up, down, left, right).
@@ -69,7 +68,7 @@ func spun_like_2(wallsData):
 		scaled_transform = Transform3D(Basis(), pos)
 		scaled_transform = scaled_transform.rotated_local(Vector3.UP, rot)
 		multimesh.set_instance_transform(i, scaled_transform)
-	
+
 	# Border walls
 	var idx = lw
 	# Top edge: horizontal walls along row 0
@@ -102,8 +101,8 @@ func spun_like_2(wallsData):
 
 func rand_quant_rot(quantize:float=PI * .5) -> float:
 	var rot = randf_range(0, PI * 2)
-	rot = round(rot / quantize) * quantize; 
-	return rot 
+	rot = round(rot / quantize) * quantize;
+	return rot
 
 
 func spun_like():
@@ -117,13 +116,13 @@ func spun_like():
 	# Maybe not all of them should be visible at first.
 	multimesh.visible_instance_count = 1000
 	#multimesh.scale = Vector3(.2,.2,1)
-	
-	var size: int = 20 
+
+	var size: int = 20
 	var scaled_transform : Transform3D
 	# Set the transform of the instances.
 	for i in multimesh.visible_instance_count:
 		scaled_transform = Transform3D(
-				Basis(), 
+				Basis(),
 				Vector3(randf_range(-size, size), 0, randf_range(-size, size))
 			)
 		scaled_transform = scaled_transform.scaled(Vector3(.5, 1, .3))
