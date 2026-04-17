@@ -1,6 +1,8 @@
 extends MultiMeshInstance3D
 
-@export var json_file: String = "res://Data/mid-walls.json"
+@onready var json_file: String =  self.get_parent().json_file
+
+#@export var json_file: String = "res://Data/mid-walls.json"
 
 func load_from_file(res_path=json_file) -> Dictionary:
 	var content_str = FileAccess.get_file_as_string(res_path)
@@ -53,8 +55,8 @@ func spun_like_2(wallsData):
 		var a: int = wall[0]
 		var b: int = wall[1]
 		var diff: int = b - a
-		var row: int = int(a / cols)
-		var col: int = a % cols
+		var row: int = int(float(a) / float(cols))
+		var col: int = a % int(cols)
 		var pos: Vector3
 		var rot: float = 0.0
 		if diff == 1:

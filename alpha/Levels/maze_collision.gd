@@ -1,9 +1,9 @@
 extends Node3D
 
 ## Path to the maze wall JSON data file.
-@export var json_file: String = "res://Data/mid-walls.json"
-## Path to the player node.
-@export var player_path: NodePath
+@onready var json_file: String =  self.get_parent().json_file
+
+@onready var player_path: NodePath = self.get_parent().player_path
 ## Number of cells per chunk side.
 @export var chunk_size: int = 10
 ## Size of each maze cell in world units (must match visual mesh).
@@ -21,7 +21,7 @@ var _wall_shape: BoxShape3D
 
 
 func _ready():
-	_player = get_node(player_path)
+	_player = self.get_parent().get_node(player_path)
 	_wall_shape = BoxShape3D.new()
 	_wall_shape.size = wall_size
 	_build_index()
@@ -48,7 +48,7 @@ func _build_index():
 		var a: int = wall[0]
 		var b: int = wall[1]
 		var diff: int = b - a
-		var row: int = a / cols
+		var row: int = int(float(a) / float(cols))
 		var col: int = a % cols
 		var pos: Vector3
 		var rot: float = 0.0
