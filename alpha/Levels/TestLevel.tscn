@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bgm8slgh3fcj5"]
+[gd_scene load_steps=16 format=3 uid="uid://bgm8slgh3fcj5"]
 
 [ext_resource type="PackedScene" uid="uid://vwr8ajoufse8" path="res://Controller/Player.tscn" id="1_611rl"]
 [ext_resource type="Environment" uid="uid://dybgim7p06ncg" path="res://Levels/BrightWorld.tres" id="1_s1ocm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://diol7e5kpdvm2" path="res://Levels/pseudo_floor.gd" id="5_2yvdw"]
 [ext_resource type="Texture2D" uid="uid://ca14skqgfmbsu" path="res://assets/wall.png" id="6_kxr0u"]
 [ext_resource type="Script" uid="uid://c8iw1p1xk1bxv" path="res://Levels/multi_mesh_instance_3d.gd" id="6_voj1p"]
+[ext_resource type="PackedScene" path="res://Scenes/MazeCollision.tscn" id="7_kxr0u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fepxo"]
 diffuse_mode = 3
@@ -15,6 +16,7 @@ albedo_color = Color(0.211117, 0.40455, 0.643137, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_2yvdw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_voj1p"]
+albedo_color = Color(1, 0.366754, 0.905108, 1)
 albedo_texture = ExtResource("2_2yvdw")
 uv1_scale = Vector3(0.3, 0.3, 0.3)
 uv2_scale = Vector3(0.3, 0.3, 0.3)
@@ -93,3 +95,7 @@ mesh = SubResource("BoxMesh_voj1p")
 
 [node name="NorthPole" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_jyvk6")
+
+[node name="MazeCollision" parent="." instance=ExtResource("7_kxr0u")]
+json_file = "res://Data/tiny-3-walls.json"
+player_path = NodePath("../Player")

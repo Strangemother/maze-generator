@@ -54,7 +54,7 @@ func spun_like_2(wallsData):
 		var a: int = wall[0]
 		var b: int = wall[1]
 		var diff: int = b - a
-		var row: int = a / cols
+		var row: int = int(a / cols)
 		var col: int = a % cols
 		var pos: Vector3
 		var rot: float = 0.0

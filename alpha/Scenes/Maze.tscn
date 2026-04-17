@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c8iw1p1xk1bxv" path="res://Levels/multi_mesh_instance_3d.gd" id="2_hdl3g"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_v2hyu"]
-size = Vector3(2.1, 1, 0.1)
+size = Vector3(2, 1, 0.1)
 
 [sub_resource type="MultiMesh" id="MultiMesh_yuvd5"]
 transform_format = 1
@@ -23,6 +23,7 @@ height = 5.0
 transform = Transform3D(1, 0, 0, 0, 1.045, 0, 0, 0, 0.946, 0, 0, 0)
 multimesh = SubResource("MultiMesh_yuvd5")
 script = ExtResource("2_hdl3g")
+json_file = "res://Data/tiny-3-walls.json"
 
 [node name="WallUnit" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000187516, 2.15859, 0)

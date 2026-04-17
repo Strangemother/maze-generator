@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwyygykhqrndj"]
+[gd_scene load_steps=9 format=3 uid="uid://bwyygykhqrndj"]
 
 [ext_resource type="Environment" uid="uid://dybgim7p06ncg" path="res://Levels/BrightWorld.tres" id="1_vt7by"]
 [ext_resource type="Texture2D" uid="uid://cd0hxvarmnxff" path="res://assets/carpet.jpg" id="2_7bnf8"]
 [ext_resource type="Script" uid="uid://diol7e5kpdvm2" path="res://Levels/pseudo_floor.gd" id="3_o2mva"]
 [ext_resource type="PackedScene" uid="uid://vwr8ajoufse8" path="res://Controller/Player.tscn" id="4_priw0"]
 [ext_resource type="PackedScene" uid="uid://ct1dnfkkfdgu1" path="res://Scenes/Maze.tscn" id="5_krklf"]
+[ext_resource type="PackedScene" path="res://Scenes/MazeCollision.tscn" id="6_vt7by"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_voj1p"]
 albedo_texture = ExtResource("2_7bnf8")
@@ -32,3 +33,7 @@ jump_height = 4.2
 mouse_sensitivity = 0.001
 
 [node name="Maze" parent="." instance=ExtResource("5_krklf")]
+
+[node name="MazeCollision" parent="." instance=ExtResource("6_vt7by")]
+json_file = "res://Data/tiny-3-walls.json"
+player_path = NodePath("../Player")
