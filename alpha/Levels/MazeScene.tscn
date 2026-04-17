@@ -1,29 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwyygykhqrndj"]
+[gd_scene load_steps=4 format=3 uid="uid://bwyygykhqrndj"]
 
 [ext_resource type="Environment" uid="uid://dybgim7p06ncg" path="res://Levels/BrightWorld.tres" id="1_vt7by"]
-[ext_resource type="Texture2D" uid="uid://cd0hxvarmnxff" path="res://assets/carpet.jpg" id="2_7bnf8"]
-[ext_resource type="Script" uid="uid://diol7e5kpdvm2" path="res://Levels/pseudo_floor.gd" id="3_o2mva"]
 [ext_resource type="PackedScene" uid="uid://vwr8ajoufse8" path="res://Controller/Player.tscn" id="4_priw0"]
 [ext_resource type="PackedScene" uid="uid://ct1dnfkkfdgu1" path="res://Scenes/Maze.tscn" id="5_krklf"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_voj1p"]
-albedo_texture = ExtResource("2_7bnf8")
-uv1_scale = Vector3(0.3, 0.3, 0.3)
-uv2_scale = Vector3(0.3, 0.3, 0.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_jyvk6"]
-size = Vector3(20, 0.2, 20)
 
 [node name="MazeScene" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_vt7by")
-
-[node name="PseudoFloor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-material_override = SubResource("StandardMaterial3D_voj1p")
-mesh = SubResource("BoxMesh_jyvk6")
-script = ExtResource("3_o2mva")
 
 [node name="Player" parent="." instance=ExtResource("4_priw0")]
 transform = Transform3D(-0.0948192, 0, -0.136799, 0, 0.166447, 0, 0.136799, 0, -0.0948192, 1.10114, 1, 1.58076)
@@ -32,5 +16,4 @@ jump_height = 4.2
 mouse_sensitivity = 0.001
 
 [node name="Maze" parent="." instance=ExtResource("5_krklf")]
-json_file = "res://Data/tiny-walls.json"
 player_path = NodePath("../Player")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ct1dnfkkfdgu1"]
+[gd_scene load_steps=10 format=3 uid="uid://ct1dnfkkfdgu1"]
 
 [ext_resource type="Script" uid="uid://0tw7tmnn8k3r" path="res://Scenes/maze.gd" id="1_hdl3g"]
 [ext_resource type="Script" uid="uid://c8iw1p1xk1bxv" path="res://Levels/multi_mesh_instance_3d.gd" id="2_hdl3g"]
 [ext_resource type="PackedScene" path="res://Scenes/MazeCollision.tscn" id="3_7hfkg"]
+[ext_resource type="Script" uid="uid://diol7e5kpdvm2" path="res://Levels/pseudo_floor.gd" id="4_7hfkg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_v2hyu"]
 size = Vector3(2, 1, 0.1)
@@ -19,6 +20,9 @@ top_radius = 0.1
 bottom_radius = 0.1
 height = 5.0
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_5lbnq"]
+size = Vector2(1, 1)
+
 [node name="Node" type="Node"]
 script = ExtResource("1_hdl3g")
 
@@ -34,3 +38,8 @@ mesh = SubResource("BoxMesh_yuvd5")
 mesh = SubResource("CylinderMesh_yuvd5")
 
 [node name="MazeCollision" parent="." instance=ExtResource("3_7hfkg")]
+
+[node name="PseudoFloor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("PlaneMesh_5lbnq")
+script = ExtResource("4_7hfkg")

@@ -30,7 +30,7 @@ func render_walls():
 	"""
 	var wallsData = load_from_file()
 	spun_like_2(wallsData)
-
+	
 func spun_like_2(wallsData):
 	# Create the multimesh.
 	#multimesh = MultiMesh.new()
@@ -39,6 +39,15 @@ func spun_like_2(wallsData):
 	var walls = wallsData['walls']
 	var cols: int = wallsData["meta"]["cols"]
 	var rows: int = wallsData["meta"]["rows"]
+	
+	var psuedoFloor:Node3D = get_node('../PseudoFloor')
+	
+	var cell_size: float = 2.0
+	psuedoFloor.scale.x = cols * cell_size
+	psuedoFloor.scale.z = rows * cell_size
+	psuedoFloor.global_position.x =  cols * cell_size * .5
+	psuedoFloor.global_position.z =  rows * cell_size * .5
+	
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	# Total = inner walls + border walls (top + bottom + left + right)
 	var lw = len(walls)
@@ -47,7 +56,6 @@ func spun_like_2(wallsData):
 	print("Loading ", lw, " walls + ", border_count, " border = ", total)
 	multimesh.instance_count = total
 	multimesh.visible_instance_count = total
-	var cell_size: float = 2.0
 	var scaled_transform: Transform3D
 	# Set the transform of the inner wall instances.
 	for i in lw:
