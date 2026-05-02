@@ -52,13 +52,14 @@ func _build_index():
 		var col: int = a % cols
 		var pos: Vector3
 		var rot: float = 0.0
+		var shared_y = 0.0
 		if diff == 1:
 			# Vertical wall on the right edge of cell a
-			pos = Vector3((col + 1) * cell_size, 0.0, (row + 0.5) * cell_size)
+			pos = Vector3((col + 1) * cell_size, shared_y, (row + 0.5) * cell_size)
 			rot = PI * 0.5
 		else:
 			# Horizontal wall on the bottom edge of cell a
-			pos = Vector3((col + 0.5) * cell_size, 0.0, (row + 1) * cell_size)
+			pos = Vector3((col + 0.5) * cell_size, shared_y, (row + 1) * cell_size)
 		_index_wall(pos, rot)
 
 	# Border walls — top edge

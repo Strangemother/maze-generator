@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://bkx1wuk3orlv5"]
 
-[ext_resource type="Script" path="res://Levels/maze_collision.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cvqxgvw836060" path="res://Levels/maze_collision.gd" id="1_script"]
 
 [node name="MazeCollision" type="Node3D"]
 script = ExtResource("1_script")

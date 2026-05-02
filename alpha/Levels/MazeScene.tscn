@@ -16,4 +16,5 @@ jump_height = 4.2
 mouse_sensitivity = 0.001
 
 [node name="Maze" parent="." instance=ExtResource("5_krklf")]
+json_file = "res://Data/huge-walls.json"
 player_path = NodePath("../Player")

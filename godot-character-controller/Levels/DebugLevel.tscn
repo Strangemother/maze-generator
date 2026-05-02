@@ -793,7 +793,7 @@ shape = SubResource("ConvexPolygonShape3D_8iluu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/Platform2/AnimatableBody3D"]
 libraries = {
-"": SubResource("AnimationLibrary_gxynm")
+&"": SubResource("AnimationLibrary_gxynm")
 }
 autoplay = "Move_2"
 
@@ -811,7 +811,7 @@ shape = SubResource("ConvexPolygonShape3D_8iluu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/Platform6/AnimatableBody3D"]
 libraries = {
-"": SubResource("AnimationLibrary_gxynm")
+&"": SubResource("AnimationLibrary_gxynm")
 }
 autoplay = "Move_2"
 speed_scale = 0.5
@@ -830,7 +830,7 @@ shape = SubResource("ConvexPolygonShape3D_8iluu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/Platform9/AnimatableBody3D"]
 libraries = {
-"": SubResource("AnimationLibrary_gxynm")
+&"": SubResource("AnimationLibrary_gxynm")
 }
 autoplay = "Move_2"
 speed_scale = 1.5
@@ -849,7 +849,7 @@ shape = SubResource("ConvexPolygonShape3D_8iluu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/Platform7/AnimatableBody3D"]
 libraries = {
-"": SubResource("AnimationLibrary_gxynm")
+&"": SubResource("AnimationLibrary_gxynm")
 }
 autoplay = "Move_3"
 speed_scale = 0.8
@@ -868,7 +868,7 @@ shape = SubResource("ConvexPolygonShape3D_8iluu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/Platform8/AnimatableBody3D"]
 libraries = {
-"": SubResource("AnimationLibrary_gxynm")
+&"": SubResource("AnimationLibrary_gxynm")
 }
 autoplay = "Move_4"
 speed_scale = 1.2
@@ -890,7 +890,7 @@ shape = SubResource("CylinderShape3D_7p2p1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/TurnTable1/AnimatableBody3D"]
 libraries = {
-"": SubResource("AnimationLibrary_gw5fu")
+&"": SubResource("AnimationLibrary_gw5fu")
 }
 autoplay = "Spin"
 
@@ -911,7 +911,7 @@ shape = SubResource("CylinderShape3D_7p2p1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/TurnTable2/AnimatableBody3D"]
 libraries = {
-"": SubResource("AnimationLibrary_gw5fu")
+&"": SubResource("AnimationLibrary_gw5fu")
 }
 autoplay = "Spin"
 speed_scale = -1.0

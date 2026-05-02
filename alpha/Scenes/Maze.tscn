@@ -1,30 +1,46 @@
-[gd_scene load_steps=10 format=3 uid="uid://ct1dnfkkfdgu1"]
+[gd_scene load_steps=13 format=3 uid="uid://ct1dnfkkfdgu1"]
 
 [ext_resource type="Script" uid="uid://0tw7tmnn8k3r" path="res://Scenes/maze.gd" id="1_hdl3g"]
 [ext_resource type="Script" uid="uid://c8iw1p1xk1bxv" path="res://Levels/multi_mesh_instance_3d.gd" id="2_hdl3g"]
-[ext_resource type="PackedScene" path="res://Scenes/MazeCollision.tscn" id="3_7hfkg"]
+[ext_resource type="PackedScene" uid="uid://bkx1wuk3orlv5" path="res://Scenes/MazeCollision.tscn" id="3_7hfkg"]
 [ext_resource type="Script" uid="uid://diol7e5kpdvm2" path="res://Levels/pseudo_floor.gd" id="4_7hfkg"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4w1m"]
+albedo_color = Color(0.418986, 0.693542, 0.875, 1)
+emission_energy_multiplier = 0.3
+anisotropy = 0.75
+ao_light_affect = 0.25
+
 [sub_resource type="BoxMesh" id="BoxMesh_v2hyu"]
-size = Vector3(2, 1, 0.1)
+material = SubResource("StandardMaterial3D_g4w1m")
+size = Vector3(2.1, 1, 0.1)
 
 [sub_resource type="MultiMesh" id="MultiMesh_yuvd5"]
 transform_format = 1
 mesh = SubResource("BoxMesh_v2hyu")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5lbnq"]
+albedo_color = Color(0.576969, 0.970131, 1, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_yuvd5"]
-size = Vector3(2, 1, 0.2)
+material = SubResource("StandardMaterial3D_5lbnq")
+size = Vector3(2, 4, 0.2)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_yuvd5"]
 top_radius = 0.1
 bottom_radius = 0.1
 height = 5.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7hfkg"]
+albedo_color = Color(1, 0.913609, 0.717775, 1)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_5lbnq"]
+material = SubResource("StandardMaterial3D_7hfkg")
 size = Vector2(1, 1)
 
 [node name="Node" type="Node"]
 script = ExtResource("1_hdl3g")
+json_file = "res://Data/gapped-walls.json"
 
 [node name="MazeWallMultiMesh" type="MultiMeshInstance3D" parent="."]
 multimesh = SubResource("MultiMesh_yuvd5")
@@ -38,6 +54,14 @@ mesh = SubResource("BoxMesh_yuvd5")
 mesh = SubResource("CylinderMesh_yuvd5")
 
 [node name="MazeCollision" parent="." instance=ExtResource("3_7hfkg")]
+
+[node name="PseudoCeiling" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0.468441, 0)
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("PlaneMesh_5lbnq")
+skeleton = NodePath("../PseudoFloor")
+script = ExtResource("4_7hfkg")
 
 [node name="PseudoFloor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)

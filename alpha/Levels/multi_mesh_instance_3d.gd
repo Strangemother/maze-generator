@@ -48,6 +48,15 @@ func spun_like_2(wallsData):
 	psuedoFloor.global_position.x =  cols * cell_size * .5
 	psuedoFloor.global_position.z =  rows * cell_size * .5
 	
+	var psuedoCeiling:Node3D = get_node('../PseudoCeiling')
+	var shared_y: float = 0.0#1.5
+	
+	psuedoCeiling.scale.x = cols * cell_size
+	psuedoCeiling.scale.z = rows * cell_size
+	psuedoCeiling.global_position.x =  cols * cell_size * .5
+	psuedoCeiling.global_position.z =  rows * cell_size * .5
+	#psuedoCeiling.global_position.y =  3.5
+	
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	# Total = inner walls + border walls (top + bottom + left + right)
 	var lw = len(walls)
@@ -69,11 +78,11 @@ func spun_like_2(wallsData):
 		var rot: float = 0.0
 		if diff == 1:
 			# Vertical wall on the right edge of cell a (runs along Z axis)
-			pos = Vector3((col + 1) * cell_size, 0.0, (row + 0.5) * cell_size)
+			pos = Vector3((col + 1) * cell_size, shared_y, (row + 0.5) * cell_size)
 			rot = PI * 0.5
 		else:
 			# Horizontal wall on the bottom edge of cell a (runs along X axis)
-			pos = Vector3((col + 0.5) * cell_size, 0.0, (row + 1) * cell_size)
+			pos = Vector3((col + 0.5) * cell_size, shared_y, (row + 1) * cell_size)
 			rot = 0.0
 		scaled_transform = Transform3D(Basis(), pos)
 		scaled_transform = scaled_transform.rotated_local(Vector3.UP, rot)
@@ -83,26 +92,26 @@ func spun_like_2(wallsData):
 	var idx = lw
 	# Top edge: horizontal walls along row 0
 	for c in cols:
-		var pos = Vector3((c + 0.5) * cell_size, 0.0, 0.0)
+		var pos = Vector3((c + 0.5) * cell_size, shared_y, 0.0)
 		scaled_transform = Transform3D(Basis(), pos)
 		multimesh.set_instance_transform(idx, scaled_transform)
 		idx += 1
 	# Bottom edge: horizontal walls along bottom of last row
 	for c in cols:
-		var pos = Vector3((c + 0.5) * cell_size, 0.0, rows * cell_size)
+		var pos = Vector3((c + 0.5) * cell_size, shared_y, rows * cell_size)
 		scaled_transform = Transform3D(Basis(), pos)
 		multimesh.set_instance_transform(idx, scaled_transform)
 		idx += 1
 	# Left edge: vertical walls along column 0
 	for r in rows:
-		var pos = Vector3(0.0, 0.0, (r + 0.5) * cell_size)
+		var pos = Vector3(0.0, shared_y, (r + 0.5) * cell_size)
 		scaled_transform = Transform3D(Basis(), pos)
 		scaled_transform = scaled_transform.rotated_local(Vector3.UP, PI * 0.5)
 		multimesh.set_instance_transform(idx, scaled_transform)
 		idx += 1
 	# Right edge: vertical walls along right of last column
 	for r in rows:
-		var pos = Vector3(cols * cell_size, 0.0, (r + 0.5) * cell_size)
+		var pos = Vector3(cols * cell_size, shared_y, (r + 0.5) * cell_size)
 		scaled_transform = Transform3D(Basis(), pos)
 		scaled_transform = scaled_transform.rotated_local(Vector3.UP, PI * 0.5)
 		multimesh.set_instance_transform(idx, scaled_transform)
