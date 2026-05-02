@@ -173,7 +173,6 @@ func _build_floor_visit_multimesh(psuedo_floor: Node3D) -> void:
 		_floor_multimesh_instance = MultiMeshInstance3D.new()
 		_floor_multimesh_instance.name = "VisitedFloorMultiMesh"
 		parent_node.add_child.call_deferred(_floor_multimesh_instance)
-		_floor_multimesh_instance.owner = parent_node.owner
 
 	var floor_tile_material := StandardMaterial3D.new()
 	floor_tile_material.vertex_color_use_as_albedo = true
