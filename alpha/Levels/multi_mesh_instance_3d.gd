@@ -172,7 +172,7 @@ func _build_floor_visit_multimesh(psuedo_floor: Node3D) -> void:
 	if _floor_multimesh_instance == null:
 		_floor_multimesh_instance = MultiMeshInstance3D.new()
 		_floor_multimesh_instance.name = "VisitedFloorMultiMesh"
-		parent_node.add_child(_floor_multimesh_instance)
+		parent_node.add_child.call_deferred(_floor_multimesh_instance)
 		_floor_multimesh_instance.owner = parent_node.owner
 
 	var floor_tile_material := StandardMaterial3D.new()
