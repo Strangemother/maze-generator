@@ -2,6 +2,18 @@ extends MultiMeshInstance3D
 
 @onready var json_file: String =  self.get_parent().json_file
 
+@export var cell_size: float = 2.0
+@export var floor_visit_color: Color = Color(0.25, 0.9, 0.45, 0.9)
+@export var floor_unvisited_color: Color = Color(1.0, 1.0, 1.0, 0.0)
+@export var floor_y_offset: float = 0.03
+
+var _cols: int = 0
+var _rows: int = 0
+var _visited: PackedByteArray = PackedByteArray()
+var _player: Node3D
+var _floor_multimesh: MultiMesh
+var _floor_multimesh_instance: MultiMeshInstance3D
+
 #@export var json_file: String = "res://Data/mid-walls.json"
 
 func load_from_file(res_path=json_file) -> Dictionary:
@@ -11,6 +23,7 @@ func load_from_file(res_path=json_file) -> Dictionary:
 
 func _ready():
 	render_walls()
+	_resolve_player()
 
 func render_walls():
 	"""
@@ -39,10 +52,10 @@ func spun_like_2(wallsData):
 	var walls = wallsData['walls']
 	var cols: int = wallsData["meta"]["cols"]
 	var rows: int = wallsData["meta"]["rows"]
+	_cols = cols
+	_rows = rows
 	
 	var psuedoFloor:Node3D = get_node('../PseudoFloor')
-	
-	var cell_size: float = 2.0
 	psuedoFloor.scale.x = cols * cell_size
 	psuedoFloor.scale.z = rows * cell_size
 	psuedoFloor.global_position.x =  cols * cell_size * .5
@@ -116,6 +129,100 @@ func spun_like_2(wallsData):
 		scaled_transform = scaled_transform.rotated_local(Vector3.UP, PI * 0.5)
 		multimesh.set_instance_transform(idx, scaled_transform)
 		idx += 1
+
+	_build_floor_visit_multimesh(psuedoFloor)
+	set_physics_process(true)
+
+
+func _resolve_player() -> void:
+	var maze_root := get_parent()
+	if maze_root == null:
+		return
+
+	var player_path_variant: Variant = maze_root.get("player_path")
+	if player_path_variant is NodePath:
+		var player_path: NodePath = player_path_variant
+		if not player_path.is_empty():
+			var player_node := maze_root.get_node_or_null(player_path)
+			if player_node is Node3D:
+				_player = player_node
+
+
+func _physics_process(_delta: float) -> void:
+	if _player == null:
+		_resolve_player()
+		if _player == null:
+			return
+
+	if _cols <= 0 or _rows <= 0 or _floor_multimesh == null:
+		return
+
+	var local_pos: Vector3 = to_local(_player.global_position)
+	var col: int = int(floor(local_pos.x / cell_size))
+	var row: int = int(floor(local_pos.z / cell_size))
+	_mark_cell_visited(col, row)
+
+
+func _build_floor_visit_multimesh(psuedo_floor: Node3D) -> void:
+	var parent_node := get_parent()
+	if parent_node == null:
+		return
+
+	_floor_multimesh_instance = parent_node.get_node_or_null("VisitedFloorMultiMesh")
+	if _floor_multimesh_instance == null:
+		_floor_multimesh_instance = MultiMeshInstance3D.new()
+		_floor_multimesh_instance.name = "VisitedFloorMultiMesh"
+		parent_node.add_child(_floor_multimesh_instance)
+		_floor_multimesh_instance.owner = parent_node.owner
+
+	var floor_tile_material := StandardMaterial3D.new()
+	floor_tile_material.vertex_color_use_as_albedo = true
+	floor_tile_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	floor_tile_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	floor_tile_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+
+	var floor_tile_mesh := PlaneMesh.new()
+	floor_tile_mesh.size = Vector2(cell_size, cell_size)
+	floor_tile_mesh.material = floor_tile_material
+
+	_floor_multimesh = MultiMesh.new()
+	_floor_multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	_floor_multimesh.use_colors = true
+	_floor_multimesh.mesh = floor_tile_mesh
+
+	var total_cells := _rows * _cols
+	_floor_multimesh.instance_count = total_cells
+	_floor_multimesh.visible_instance_count = total_cells
+
+	_floor_multimesh_instance.multimesh = _floor_multimesh
+
+	_visited.resize(total_cells)
+	for i in total_cells:
+		_visited[i] = 0
+
+	var y: float = psuedo_floor.global_position.y + floor_y_offset
+	for row in _rows:
+		for col in _cols:
+			var idx := _index_for_cell(col, row)
+			var pos := Vector3((col + 0.5) * cell_size, y, (row + 0.5) * cell_size)
+			_floor_multimesh.set_instance_transform(idx, Transform3D(Basis(), pos))
+			_floor_multimesh.set_instance_color(idx, floor_unvisited_color)
+
+
+func _mark_cell_visited(col: int, row: int) -> void:
+	if col < 0 or col >= _cols or row < 0 or row >= _rows:
+		return
+
+	var idx := _index_for_cell(col, row)
+	if _visited[idx] == 1:
+		return
+
+	_visited[idx] = 1
+	_floor_multimesh.set_instance_color(idx, floor_visit_color)
+
+
+func _index_for_cell(col: int, row: int) -> int:
+	return row * _cols + col
 
 
 func rand_quant_rot(quantize:float=PI * .5) -> float:
